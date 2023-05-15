@@ -1,9 +1,16 @@
 import BaseLayout from "@/components/layouts/BaseLayout";
+import Link from "next/link";
 import axios from "axios";
 const Portfolios = ({ posts }) => {
-  const renderPosts = ()=>{
-    return posts.map(post=> <li key={post.id}>{post.title}</li>)
-  }
+  const renderPosts = () => {
+    return posts.map((post) =>
+     <li key={post.id}>
+        <Link href={`portfolios/${post.id}`}> 
+         {post.title}
+        </Link>
+       
+     </li>);
+  };
   console.log(posts);
   return (
     <BaseLayout>
@@ -22,7 +29,7 @@ Portfolios.getInitialProps = async () => {
     console.log(e);
   }
 
-  return {posts: posts.slice(0, 10)}
+  return { posts: posts.slice(0, 10) };
 };
 
 export default Portfolios;
