@@ -1,38 +1,34 @@
 import BaseLayout from "@/components/layouts/BaseLayout";
 import BasePage from "@/components/BasePage";
 import Link from "next/link";
-import axios from "axios";
-const Portfolios = ({ posts }) => {
-  const renderPosts = () => {
-    return posts.map((post) =>
-     <li key={post.id}>
-        <Link href={`portfolios/${post.id}`}> 
-         {post.title}
-        </Link>
-       
-     </li>);
+// import { useGetData } from "@/actions";
+import useSWR from 'swr'
+const fetcher = (url) =>fetch(url).then(res => res.json())
+const Portfolios = () => {
+  const { data, error, loading } = useSWR('/api/v1/posts',fetcher);
+
+  const renderPosts = (posts) => {
+    return posts.map((post) => (
+      <li key={post.id}>
+        <Link href={`portfolios/${post.id}`}>{post.title}</Link>
+      </li>
+    ));
   };
-  console.log(posts);
   return (
     <BaseLayout>
-    <BasePage>
-      <h1>portfolios page</h1>
-      <ul>{renderPosts()}</ul>
+      <BasePage>
+        <h1>portfolios page</h1>
+        {
+          loading && <img className="" width={25} src={"load.gif"}/>
+        }
+        {
+          data && <ul>{renderPosts(data)}</ul>
+        }{
+          error && <div className="alert alert-danger">{error.message}</div>
+        }
+        
       </BasePage>
     </BaseLayout>
   );
 };
-
-Portfolios.getInitialProps = async () => {
-  let posts = [];
-  try {
-    const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
-    posts = res.data;
-  } catch (e) {
-    console.log(e);
-  }
-
-  return { posts: posts.slice(0, 10) };
-};
-
 export default Portfolios;
