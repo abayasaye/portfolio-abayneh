@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  Nav,
-  NavItem,
-} from "reactstrap";
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
 
 const BsNavLink = (props) => {
   const { href, title } = props;
@@ -17,13 +11,13 @@ const BsNavLink = (props) => {
   );
 };
 
-const LoginLink = ()=>
+const LoginLink = () => (
   <span className="nav-link port-navbar-link clickable">Login</span>
+);
 
-
-const LogoutLink = ()=>
+const LogoutLink = () => (
   <span className="nav-link port-navbar-link clickable">Logout</span>
-
+);
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,11 +56,11 @@ const Header = () => {
             </NavItem>
           </Nav>
           <Nav navbar>
-          <NavItem className="port-navbar-item">
-              <LoginLink/>
+            <NavItem className="port-navbar-item">
+              <LoginLink />
             </NavItem>
             <NavItem className="port-navbar-item">
-              <LogoutLink/>
+              <LogoutLink />
             </NavItem>
           </Nav>
         </Collapse>
