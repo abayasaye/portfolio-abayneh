@@ -2,11 +2,15 @@ import React from 'react';
 import BaseLayout from '../components/layouts/BaseLayout';
 import { Container, Row, Col } from 'reactstrap';
 import ReactTyped from 'react-typed';
+import { useGetUser } from '@/actions/user';
 const roles =["Full Stack Developer", "Tech Lover", "entrepreneur ", "book reader ", "sea lover ", "traveler "]
-class Index extends React.Component {
-  render() {
+const Index =()=>{
+  const {data, loading} = useGetUser()
     return (
-      <BaseLayout className="cover">
+      <BaseLayout className="cover"
+      user={data}
+      loading={loading}
+      >
         <div className="main-section">
           <div className="background-image">
             <img src="/images/background-index.png" />
@@ -60,7 +64,5 @@ class Index extends React.Component {
         </div>
       </BaseLayout>
     )
-  }
 }
-
 export default Index;

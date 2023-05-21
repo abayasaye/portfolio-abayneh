@@ -2,18 +2,18 @@ import BaseLayout from "@/components/layouts/BaseLayout";
 import BasePage from "@/components/BasePage";
 import { useGetUser } from "@/actions/user";
 
-const Cv = () => {
+const Secret = () => {
   const {data, loading} = useGetUser()
   return (
     <BaseLayout
     user={data}
     loading={loading}
     >
-      <BasePage>
-        <h1>cv page</h1>
-      </BasePage>
+    <BasePage>
+      <h1>Secret page</h1>
+      </BasePage>  
     </BaseLayout>
   );
 };
 
-export default Cv;
+export default Secret;
