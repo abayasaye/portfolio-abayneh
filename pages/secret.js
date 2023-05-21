@@ -1,19 +1,15 @@
 import BaseLayout from "@/components/layouts/BaseLayout";
 import BasePage from "@/components/BasePage";
-import { useGetUser } from "@/actions/user";
+import withAuth from "@/hoc/withAuth";
 
-const Secret = () => {
-  const {data, loading} = useGetUser()
+const Secret = ({ data, loading }) => {
   return (
-    <BaseLayout
-    user={data}
-    loading={loading}
-    >
-    <BasePage>
-      <h1>Secret page</h1>
-      </BasePage>  
+    <BaseLayout user={data} loading={loading}>
+      <BasePage>
+        <h1>Secret page - hello: {data.name}</h1>
+      </BasePage>
     </BaseLayout>
   );
 };
 
-export default Secret;
+export default withAuth(Secret);
