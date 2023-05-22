@@ -1,15 +1,43 @@
-import { initAuth0 } from '@auth0/nextjs-auth0';
+import { initAuth0 } from "@auth0/nextjs-auth0";
 
-export default initAuth0({
+const auth0 = initAuth0({
   domain: process.env.AUTH0_DOMAIN,
   issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
   clientId: process.env.AUTH0_CLIENT_ID,
   secret: process.env.AUTH0_CLIENT_SECRET,
-  scope: 'openid profile',
+  scope: "openid profile",
   redirectUri: process.env.AUTH0_REDIRECT_URI,
   postLogoutRedirectUri: process.env.AUTH0_POST_LOGOUT,
   baseURL: process.env.BASE_URL,
   session: {
-    cookieSecret: process.env.AUTH0_COOKIE_SECRET
-  }
+    cookieSecret: process.env.AUTH0_COOKIE_SECRET,
+  },
 });
+
+export default auth0;
+
+export const authrizeUser = async (req, res) => {
+  const session = await auth0.getSession(req, res);
+  if (!session || !session.user) {
+    res.writeHead(302, {
+      Location: "/api/auth/login",
+    });
+    res.end();
+    return null;
+  }
+  return session.user;
+};
+
+
+export const withAuth = (getData) => async ({req, res})=>{
+  const session = await auth0.getSession(req, res);
+  if (!session ||!session.user) {
+      res.writeHead(302, {
+        Location: "/api/auth/login",
+      });
+      res.end();
+      return {props : {}};
+    }
+    const data = getData ? await getData({req, res}, session.user) : {};
+    return {props: {user: session.user, ...data}};
+}
