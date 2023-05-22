@@ -1,17 +1,14 @@
 import BaseLayout from "@/components/layouts/BaseLayout";
 import BasePage from "@/components/BasePage";
-import { useGetUser } from "@/actions/user";
-
-const About = () => {
-  const { data, loading } = useGetUser();
-  debugger
+import withAuth from "@/hoc/withAuth";
+const AdminPage = ({ data, loading }) => {
   return (
     <BaseLayout user={data} loading={loading}>
       <BasePage>
-        <h1>about page</h1>
+        <h1>Admin page - hello: {data.name}</h1>
       </BasePage>
     </BaseLayout>
   );
 };
 
-export default About;
+export default withAuth(AdminPage);
