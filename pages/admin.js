@@ -11,4 +11,4 @@ const AdminPage = ({ data, loading }) => {
   );
 };
 
-export default withAuth(AdminPage);
+export default withAuth(AdminPage)('admin');

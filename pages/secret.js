@@ -12,4 +12,4 @@ const Secret = ({ data, loading }) => {
   );
 };
 
-export default withAuth(Secret);
+export default withAuth(Secret)();

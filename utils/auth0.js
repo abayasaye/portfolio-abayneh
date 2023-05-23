@@ -1,5 +1,4 @@
 import { initAuth0 } from "@auth0/nextjs-auth0";
-
 const auth0 = initAuth0({
   domain: process.env.AUTH0_DOMAIN,
   issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
@@ -13,7 +12,6 @@ const auth0 = initAuth0({
     cookieSecret: process.env.AUTH0_COOKIE_SECRET,
   },
 });
-
 export default auth0;
 
 export const authrizeUser = async (req, res) => {
@@ -28,16 +26,17 @@ export const authrizeUser = async (req, res) => {
   return session.user;
 };
 
-
-export const withAuth = (getData) => async ({req, res})=>{
-  const session = await auth0.getSession(req, res);
-  if (!session ||!session.user) {
+export const withAuth = 
+  getData => role =>
+  async ({ req, res }) => {
+    const session = await auth0.getSession(req, res);
+    if (!session || !session.user || (role && session.user  && !session.user[process.env.AUTH0_HOMESPACE + '/roles'].includes(role))) {
       res.writeHead(302, {
         Location: "/api/auth/login",
       });
       res.end();
-      return {props : {}};
+      return { props: {} };
     }
-    const data = getData ? await getData({req, res}, session.user) : {};
-    return {props: {user: session.user, ...data}};
-}
+    const data = getData ? await getData({ req, res }, session.user) : {};
+    return { props: { user: session.user, ...data } };
+  };
