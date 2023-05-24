@@ -50,7 +50,7 @@ const Header = ({ user, loading }) => {
             <NavItem className="port-navbar-item">
               <BsNavLink href="/cv" title="Cv" />
             </NavItem>
-            <NavItem className="port-navbar-item">
+            {/* <NavItem className="port-navbar-item">
               <BsNavLink href="/secret" title="secret" />
             </NavItem>
             <NavItem className="port-navbar-item">
@@ -61,7 +61,7 @@ const Header = ({ user, loading }) => {
             </NavItem>
             <NavItem className="port-navbar-item">
               <BsNavLink href="/adminssr" title="adminSSR" />
-            </NavItem>
+            </NavItem> */}
           </Nav>
           <Nav navbar className="">
             {!loading && (
