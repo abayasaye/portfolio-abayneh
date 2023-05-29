@@ -5,8 +5,9 @@ import { useGetUser } from "@/actions/user";
 import PortfolioApi from "@/lib/api/portfolios";
 import { Row, Col } from "reactstrap";
 import PortfolioCard from "@/components/PortfolioCard";
-
+import {useRouter} from "next/router";
 const Portfolios = ({ portfolios }) => {
+  const router = useRouter();
   const { data: dataUser, loading: loadingUser } = useGetUser();
   return (
     <BaseLayout user={dataUser} loading={loadingUser}>
@@ -15,7 +16,9 @@ const Portfolios = ({ portfolios }) => {
       className="portfolio-page">
         <Row>
           {portfolios.map((portfolio) => (
-            <Col md="4" key={portfolio._id}>
+            <Col onClick={()=>{
+              router.push('/portfolios/[id]' , `/portfolios/${portfolio._id}`)
+            }} md="4" key={portfolio._id}>
               <PortfolioCard portfolio={portfolio} />
             </Col>
           ))}
