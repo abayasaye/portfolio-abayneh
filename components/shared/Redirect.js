@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import BasePage from "../BasePage";
 
 const Redirect = ({ to, ssr }) => {
   const router = useRouter();
@@ -11,7 +12,7 @@ const Redirect = ({ to, ssr }) => {
       router.push(to);
     }
   }, []);
-  return null;
+  return <BasePage/>;
 };
 
 export default Redirect;

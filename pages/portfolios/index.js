@@ -17,7 +17,7 @@ const Portfolios = ({ portfolios }) => {
         <Row>
           {portfolios.map((portfolio) => (
             <Col onClick={()=>{
-              router.push('/portfolios/[id]' , `/portfolios/${portfolio._id}`)
+              router.push('/portfolios/[id]', `/portfolios/${portfolio._id}`)
             }} md="4" key={portfolio._id}>
               <PortfolioCard portfolio={portfolio} />
             </Col>
