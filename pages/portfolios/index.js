@@ -1,32 +1,38 @@
 import BaseLayout from "@/components/layouts/BaseLayout";
 import BasePage from "@/components/BasePage";
 import Link from "next/link";
-import { useGetPosts } from "@/actions";
 import { useGetUser } from "@/actions/user";
-import useSWR from "swr";
+import PortfolioApi from "@/lib/api/portfolios";
+import { Row, Col } from "reactstrap";
+import PortfolioCard from "@/components/PortfolioCard";
 
-const Portfolios = () => {
-  const { data, error, loading } = useGetPosts();
+const Portfolios = ({ portfolios }) => {
   const { data: dataUser, loading: loadingUser } = useGetUser();
-
-  const renderPosts = (posts) => {
-    return posts.map((post) => (
-      <li key={post.id}>
-        <Link className="lists" href={`portfolios/${post.id}`}>
-          {post.title}
-        </Link>
-      </li>
-    ));
-  };
   return (
     <BaseLayout user={dataUser} loading={loadingUser}>
-      <BasePage>
-        <h1>portfolios page</h1>
-        {loading && <img className="" width={25} src={"../../././load.gif"} />}
-        {data && <ul>{renderPosts(data)}</ul>}
-        {error && <div className="alert alert-danger">{error.message}</div>}
+      <BasePage
+      header='portfolios'
+      className="portfolio-page">
+        <Row>
+          {portfolios.map((portfolio) => (
+            <Col md="4" key={portfolio._id}>
+              <PortfolioCard portfolio={portfolio} />
+            </Col>
+          ))}
+        </Row>
       </BasePage>
     </BaseLayout>
   );
 };
+
+export const getStaticProps = async () => {
+  const json = await new PortfolioApi().getAll();
+  const portfolios = json.data;
+  return {
+    props: {
+      portfolios,
+    },
+  };
+};
+
 export default Portfolios;

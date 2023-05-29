@@ -15,15 +15,15 @@ const LoginLink = () => <BsNavLink href="/api/auth/login" title="login" />;
 
 const LogoutLink = () => <BsNavLink href="/api/auth/logout" title="logout" />;
 
-const Header = ({ user, loading }) => {
+const Header = ({ user, loading, className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
   return (
     <div>
       <Navbar
-        className="port-navbar port-default absolute"
-        color="transparent"
+        className={`port-navbar port-default absolute ${className}`}
+        // color="transparent"
         dark
         expand="md"
       >
