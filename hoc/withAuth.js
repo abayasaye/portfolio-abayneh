@@ -9,11 +9,11 @@ const withAuth = (Component) => (role) => {
     }
 
     if (!data) {
-      return <Redirect ssr to="api/auth/login" />;
+      return <Redirect ssr to="/api/auth/login" />;
     }
     {
-      if(data  && !data[process.env.AUTH0_3HOMESPACE + '/roles'].includes(role)){
-        return <Redirect ssr to="api/auth/login" />;
+      if(data  && !data[process.env.AUTH0_HOMESPACE + '/roles'].includes(role)){
+        return <Redirect ssr to="/api/auth/login" />;
       }
       
       return <Component data={data} loading={loading} {...props} />;
