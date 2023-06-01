@@ -14,7 +14,7 @@ export const fetcher = (url) =>
   });
 
 export const useGetPosts = () => {
-  const { data, error, ...rest } = useSWR("api/v1/posts", fetcher);
+  const { data, error, ...rest } = useSWR("/api/v1/posts", fetcher);
   return { data, error, loading: !data && !error, ...rest };
 };
 
