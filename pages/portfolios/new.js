@@ -4,13 +4,13 @@ import { Col, Row } from "reactstrap";
 import PortfolioForm from "@/components/PortfolioForm";
 import { portfolioCreate } from "@/actions/portfolios";
 import withAuth from "@/hoc/withAuth";
-const CreatePortfolio = ({ data:user, loading }) => {
+const CreatePortfolio = ({ data, loading }) => {
   const newPortfolio = (data)=>{
     alert(JSON.stringify(data))
     portfolioCreate(data)
   }
   return (
-    <BaseLayout user={user} loading={loading}>
+    <BaseLayout user={data} loading={loading}>
       <BasePage header="Create Portfolio">
         <Row>
           <Col md='8'>
