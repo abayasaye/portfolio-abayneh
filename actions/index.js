@@ -26,6 +26,56 @@ export const useGetPostById = (id) => {
   return { data, error, loading: !data && !error, ...rest };
 };
 
+export function useApiHandler(apiCall) {
+  const [request, setRequest] = useState({
+    error: null,
+    data: null,
+    loading: false,
+  });
+  const handler = async (...data) => {
+    setRequest({ error: null, data: null, loading: true });
+    try {
+      const json = await apiCall(...data);
+      setRequest({ error: null, data: json.data, loading: false });
+    } catch (e) {
+      const message =
+        (e.response && e.response.data.message) || "Ooops! Something went wrong!";
+      setRequest({ error: message, data: null, loading: false });
+    }
+  };
+  return [handler, { ...request }];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // export const useGetData = (url) => {
 //   const [data, setData] = useState([]);
 //   const [error, setError] = useState();
