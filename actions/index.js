@@ -37,10 +37,12 @@ export function useApiHandler(apiCall) {
     try {
       const json = await apiCall(...data);
       setRequest({ error: null, data: json.data, loading: false });
+      return json.data;
     } catch (e) {
       const message =
         (e.response && e.response.data.message) || "Ooops! Something went wrong!";
       setRequest({ error: message, data: null, loading: false });
+      return Promise.reject(message);
     }
   };
   return [handler, { ...request }];

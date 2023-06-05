@@ -16,6 +16,11 @@ const auth0 = initAuth0({
 });
 export default auth0;
 
+
+// export const adminAuth = (user, role) => {
+//   return (user && user[proccess.env.AUTH0_HOMESPACE + '/roles'].includes(role))
+// }
+
 export const authrizeUser = async (req, res) => {
   const session = await auth0.getSession(req, res);
   if (!session || !session.user) {
