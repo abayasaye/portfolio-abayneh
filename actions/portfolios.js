@@ -9,11 +9,15 @@ export const createPortfolio = (data)=>  axios.post("/api/v1/portfolios", data);
 
 
 export const updatePortfolio = (id, data)=>  axios.patch(`/api/v1/portfolios/${id}`, data);
+export const deletePortfolio = (id)=>  axios.delete(`/api/v1/portfolios/${id}`);
 
 
 export const useCreatePortfolioApi =  () => useApiHandler(createPortfolio)
 
 export const useUpdatePortfolioApi =  () => useApiHandler(updatePortfolio)
+
+export const useDeletePortfolioApi =  () => useApiHandler(deletePortfolio)
+
 
 
 export const useGetPortfolio = (id) => {
