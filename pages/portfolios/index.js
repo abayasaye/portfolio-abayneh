@@ -1,6 +1,6 @@
+import { useState } from "react";
 import BaseLayout from "@/components/layouts/BaseLayout";
 import BasePage from "@/components/BasePage";
-import Link from "next/link";
 import { useGetUser } from "@/actions/user";
 import { useDeletePortfolioApi } from "@/actions/portfolios";
 import PortfolioApi from "@/lib/api/portfolios";
@@ -13,8 +13,9 @@ import {useRouter} from "next/router";
 
 
 
-const Portfolios = ({ portfolios}) => {
+const Portfolios = ({ portfolios:initialPortfolio}) => {
   const router = useRouter();
+  const [portfolios, setPortfolios] = useState(initialPortfolio)
   const { data: dataUser, loading: loadingUser } = useGetUser();
   const [deletePortfolio, {data, error}] = useDeletePortfolioApi();
 
@@ -28,7 +29,10 @@ const _deletePortfolio = async  (e, portfolioId)=>{
   const isConfirm = confirm('Are you sure you want to delete this portfolio?')
   if (isConfirm){
     await deletePortfolio(portfolioId)
+    setPortfolios(portfolios.filter((portfolio)=>portfolio._id !== portfolioId));
   }
+
+
 }
 
   return (
@@ -39,6 +43,7 @@ const _deletePortfolio = async  (e, portfolioId)=>{
         <Row>
           {portfolios.map((portfolio) => (
             <Col onClick={()=>{
+              debugger
               router.push('/portfolios/[id]', `/portfolios/${portfolio._id}`)
             }} md="4" key={portfolio._id}>
               <PortfolioCard portfolio={portfolio}>
