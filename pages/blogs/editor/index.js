@@ -2,12 +2,12 @@ import BaseLayout from "@/components/layouts/BaseLayout";
 import BasePage from "@/components/BasePage";
 import { useGetUser } from "@/actions/user";
 import withAuth from "@/hoc/withAuth";
-const BlogsEditor = ({user, loading}) => {
-
+const BlogsEditor = () => {
+    const { data, loading } = useGetUser();
   return (
-    <BaseLayout user={user} loading={loading}>
-      <BasePage header='DAHBOARD'>
-        <h1>Dashboard page</h1>
+    <BaseLayout user={data} loading={loading}>
+      <BasePage header='Blogs Editor'>
+        <h1>BlogsEditor page</h1>
       </BasePage>
     </BaseLayout>
   );

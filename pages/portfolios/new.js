@@ -5,8 +5,10 @@ import { Row, Col } from "reactstrap";
 import PortfolioForm from "@/components/PortfolioForm";
 import { useCreatePortfolioApi } from "@/actions/portfolios";
 import Redirect from "@/components/shared/Redirect";
+import { useGetUser } from "@/actions/user";
 
-const PortfolioNew = ({ user, loading: userLoading }) => {
+const PortfolioNew = () => {
+  const {data:user, loading: userLoading } = useGetUser()
   const [createPortfolio, { data, error, loading }]=useCreatePortfolioApi();
 
 
