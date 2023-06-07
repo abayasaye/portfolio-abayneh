@@ -6,6 +6,7 @@ import { useDeletePortfolioApi } from "@/actions/portfolios";
 import PortfolioApi from "@/lib/api/portfolios";
 import { Row, Col, Button } from "reactstrap";
 import PortfolioCard from "@/components/PortfolioCard";
+import { isAuthorized } from "@/utils/isAuth";
 import {useRouter} from "next/router";
 
 
@@ -19,9 +20,9 @@ const Portfolios = ({ portfolios:initialPortfolio}) => {
   const { data: dataUser, loading: loadingUser } = useGetUser();
   const [deletePortfolio, {data, error}] = useDeletePortfolioApi();
 
- const isAuthorized = (dataUser, role) => {
-  return (dataUser && dataUser[process.env.AUTH0_NAMESPACE + '/roles'].includes(role));
-}
+//   const isAuthorized = (dataUser, role) => {
+//   return (dataUser && dataUser[process.env.AUTH0_NAMESPACE + '/roles'].includes(role));
+// }
 
 
 const _deletePortfolio = async  (e, portfolioId)=>{

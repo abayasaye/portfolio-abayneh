@@ -44,3 +44,11 @@ export const withAuth =
     const data = getData ? await getData({ req, res }, session.user) : {};
     return { props: { user: session.user, ...data } };
   };
+
+
+
+    export const isAuthorized = (dataUser, role) => {
+    return (dataUser && dataUser[process.env.AUTH0_NAMESPACE + '/roles'].includes(role));
+  }
+  
+

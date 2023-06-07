@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
-
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import {isAuthorized} from "utils/isAuth";
 const BsNavLink = (props) => {
-  const { href, title } = props;
+  const { href, title, className='' } = props;
   return (
-    <Link className="nav-link port-navbar-link" href={href}>
+    <Link className={`nav-link port-navbar-link ${className}`} href={href}>
       {title}
     </Link>
   );
@@ -14,6 +14,35 @@ const BsNavLink = (props) => {
 const LoginLink = () => <BsNavLink href="/api/auth/login" title="login" />;
 
 const LogoutLink = () => <BsNavLink href="/api/auth/logout" title="logout" />;
+
+
+const AdminMenu = () => {
+  const [dropdown, setDropdown] =useState(false)
+  return(
+    <Dropdown className="port-navbar-link port-dropdown-menu"
+    nav
+    isOpen={dropdown}
+    toggle={()=>setDropdown(!dropdown)}
+    >
+      <DropdownToggle className="port-dropdown-toggle" nav caret>
+      Admin
+      </DropdownToggle>
+      <DropdownMenu end>
+        <DropdownItem>
+        <BsNavLink className="port-dropdown-item" href="/portfolios/new" title="Create Portfolio" />
+        </DropdownItem>
+        <DropdownItem>
+        <BsNavLink className="port-dropdown-item" href="/blogs/editor" title="Blog Editor" />
+        </DropdownItem>
+        <DropdownItem>
+        <BsNavLink className="port-dropdown-item" href="/blogs/dashboard" title="Dashboard" />
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  )
+}
+
+
 
 const Header = ({ user, loading, className }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +63,7 @@ const Header = ({ user, loading, className }) => {
         </div>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
+          <Nav className="mr-auto" navbar >
             <NavItem className="port-navbar-item">
               <BsNavLink href="/" title="Home" />
             </NavItem>
@@ -66,19 +95,23 @@ const Header = ({ user, loading, className }) => {
               <BsNavLink href="portfolios/new" title="new" />
             </NavItem> */}
           </Nav>
-          <Nav navbar className="">
+          <Nav navbar  className="">
             {!loading && (
               <>
-                {user && (
+                {user && 
+                <>
+                {isAuthorized(user, 'admin') && <AdminMenu/>}
                   <NavItem className="port-navbar-item">
                     <LogoutLink />
                   </NavItem>
-                )}
-                {!user && (
+                </>
+                }
+                
+                {!user && 
                   <NavItem className="port-navbar-item">
                     <LoginLink />
                   </NavItem>
-                )}
+                }
               </>
             )}
           </Nav>
