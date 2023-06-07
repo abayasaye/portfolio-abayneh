@@ -12,7 +12,7 @@ const withAuth = (Component) => (role) => {
       return <Redirect ssr to="/api/auth/login" />;
     }
     {
-      if(data  && !data[process.env.AUTH0_HOMESPACE + '/roles'].includes(role)){
+      if(data  && !data[process.env.AUTH0_NAMESPACE + '/roles'].includes(role)){
         return <Redirect ssr to="/api/auth/login" />;
       }
       

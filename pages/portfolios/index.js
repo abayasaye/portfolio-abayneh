@@ -20,7 +20,7 @@ const Portfolios = ({ portfolios:initialPortfolio}) => {
   const [deletePortfolio, {data, error}] = useDeletePortfolioApi();
 
  const isAuthorized = (dataUser, role) => {
-  return (dataUser && dataUser[process.env.AUTH0_HOMESPACE + '/roles'].includes(role));
+  return (dataUser && dataUser[process.env.AUTH0_NAMESPACE + '/roles'].includes(role));
 }
 
 
@@ -43,7 +43,6 @@ const _deletePortfolio = async  (e, portfolioId)=>{
         <Row>
           {portfolios.map((portfolio) => (
             <Col onClick={()=>{
-              debugger
               router.push('/portfolios/[id]', `/portfolios/${portfolio._id}`)
             }} md="4" key={portfolio._id}>
               <PortfolioCard portfolio={portfolio}>
@@ -62,7 +61,6 @@ const _deletePortfolio = async  (e, portfolioId)=>{
                 className="btn-danger">Delete</Button>
                 </>
                 }
-              
               </PortfolioCard>
             </Col>
           ))}

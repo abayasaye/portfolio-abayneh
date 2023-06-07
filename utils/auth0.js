@@ -34,7 +34,7 @@ export const withAuth =
   getData => role =>
   async ({ req, res }) => {
     const session = await auth0.getSession(req, res);
-    if (!session || !session.user || (role && session.user  && !session.user[process.env.AUTH0_HOMESPACE + '/roles'].includes(role))) {
+    if (!session || !session.user || (role && session.user  && !session.user[process.env.AUTH0_NAMESPACE + '/roles'].includes(role))) {
       res.writeHead(302, {
         Location: "/api/auth/login",
       });

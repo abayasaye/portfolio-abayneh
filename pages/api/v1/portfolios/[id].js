@@ -19,12 +19,12 @@ console.log(req.method);
 
 
   if (req.method === 'DELETE') {
-    // try {
+    try {
       const { accessToken } = await auth0.getSession(req,res);
       const json = await new PortfolioApi(accessToken).delete(req.query.id);
       return res.json(json.data);
-    // } catch (e) {
-    //   return res.status(e.status || 422).json(e.response.data );
-    // }
+    } catch (e) {
+      return res.status(e.status || 422).json(e.response.data );
+    }
   }
 };
