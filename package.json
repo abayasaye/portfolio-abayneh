@@ -22,6 +22,7 @@
     "react-typed": "^1.2.0",
     "reactstrap": "^9.1.10",
     "sass": "^1.62.1",
+    "slate-simple-editor": "github:Jerga99/slate-simple-editor",
     "swr": "^2.1.5"
   }
 }
