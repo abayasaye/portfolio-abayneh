@@ -8,9 +8,6 @@
         background-color:#2c3e50;
         // padding:30px;
       }
-    .collapse{
-        justify-content: space-between;
-      }
     .port-navbar {
     
       &-brand {
@@ -44,10 +41,10 @@
       }
     }
 
-    .usersButton{
-      display: flex;
-      justify-content: end;
+    .collapse{
+      justify-content: space-between;
     }
+    
     .port-dropdown-menu {
       .dropdown-item:active{
         background-color: #f5f5f5;

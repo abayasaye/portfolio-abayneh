@@ -95,7 +95,7 @@ const Header = ({ user, loading, className }) => {
               <BsNavLink href="portfolios/new" title="new" />
             </NavItem> */}
           </Nav>
-          <Nav navbar  className="usersButton">
+          <Nav navbar  className="">
             {!loading && (
               <>
                 {user && 
