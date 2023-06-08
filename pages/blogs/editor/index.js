@@ -1,9 +1,7 @@
 import BaseLayout from "@/components/layouts/BaseLayout";
 import BasePage from "@/components/BasePage";
-import { useGetUser } from "@/actions/user";
 import withAuth from "@/hoc/withAuth";
-const BlogsEditor = () => {
-    const { data, loading } = useGetUser();
+const BlogsEditor = ({ data, loading }) => {
   return (
     <BaseLayout user={data} loading={loading}>
       <BasePage header='Blogs Editor'>

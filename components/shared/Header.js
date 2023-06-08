@@ -62,7 +62,7 @@ const Header = ({ user, loading, className }) => {
           </Link>
         </div>
         <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
+        <Collapse isOpen={isOpen} navbar className="collapse">
           <Nav className="mr-auto" navbar >
             <NavItem className="port-navbar-item">
               <BsNavLink href="/" title="Home" />
@@ -95,7 +95,7 @@ const Header = ({ user, loading, className }) => {
               <BsNavLink href="portfolios/new" title="new" />
             </NavItem> */}
           </Nav>
-          <Nav navbar  className="">
+          <Nav navbar  className="usersButton">
             {!loading && (
               <>
                 {user && 

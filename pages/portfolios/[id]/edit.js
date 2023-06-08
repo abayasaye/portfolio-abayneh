@@ -1,6 +1,5 @@
 import BaseLayout from "@/components/layouts/BaseLayout";
 import BasePage from "@/components/BasePage";
-import { useGetUser } from "@/actions/user";
 import withAuth from "@/hoc/withAuth";
 import { useRouter } from "next/router";
 import { useGetPortfolio, useUpdatePortfolioApi } from "@/actions/portfolios";
@@ -8,7 +7,8 @@ import PortfolioForm from "@/components/PortfolioForm";
 import { Row, Col } from "reactstrap";
 import { toast } from 'react-toastify';
 
-const portfolioEdit = ({ user }) => {
+const portfolioEdit = ({data: user}) => {
+
   const router = useRouter();
   const [updatePortfolio, {error}] = useUpdatePortfolioApi();
   const { data: initialData } = useGetPortfolio(router.query.id);
