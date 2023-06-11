@@ -4,23 +4,23 @@ import withAuth from "@/hoc/withAuth";
 import { Editor } from "slate-simple-editor";
 import { useCreateBlogApi } from "@/actions/blogs";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 const BlogsEditor = ({ data, loading }) => {
-  const [createBlog, { data: blogData, error }] = useCreateBlogApi();
+  const router = useRouter()
+  const [createBlog, { data: blogData, error, loading: blogLoading }] = useCreateBlogApi();
 
   const saveBlog = async (data) => {
-    await createBlog(data);
-    alert("Blog saved");
+    const createdBlog = await createBlog(data);
+    router.push('/blogs/editor/[id]', `/blogs/editor/${createdBlog._id}`)
   };
-
-  if(error){
-toast.error(error);
+  if (error) {
+    toast.error(error);
   }
 
   return (
     <BaseLayout user={data} loading={loading}>
       <BasePage>
-        <Editor onSave={saveBlog} />
-        <h1>BlogsEditor page</h1>
+        <Editor onSave={saveBlog} loading={blogLoading}/>
       </BasePage>
     </BaseLayout>
   );
