@@ -16,6 +16,4 @@ console.log(req.method);
       return res.status(e.status || 422).json(e.response.data );
     }
   };
-
-
 };
