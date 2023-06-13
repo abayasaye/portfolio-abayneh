@@ -4,7 +4,7 @@ export default async function handleBlog(req, res) {
 console.log(req.method);
   if(req.method === "GET"){
        const json = await new BlogApi().getById(req.query.id);
-  return res.status(200).json(json.data)  
+  return res.json(json.data)  
   }
 
   if(req.method === "PATCH"){

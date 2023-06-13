@@ -7,13 +7,18 @@ import auth0 from "@/utils/auth0";
 import BlogApi from "@/lib/api/blogs";
 import Link from "next/link";
 
-const Dashboard = ({ user, blogs }) => {
-  debugger
+const Dashboard = ({user, blogs }) => {
   const renderBlogs = (blogs, status) => (
     <ul className="user-blogs-list">
-      {blogs.filter((blog) => blog.status === status).map((blog) => (
+      {blogs
+        .filter((blog) => blog.status === status)
+        .map((blog) => (
           <li key={blog._id}>
-            <Link className="a" href="/blogs/editor/[id]" as={`/blogs/editor/${blog._id}`}>
+            <Link
+              className="a"
+              href="/blogs/editor/[id]"
+              as={`/blogs/editor/${blog._id}`}
+            >
               {blog.title}
             </Link>
           </li>
@@ -39,10 +44,9 @@ const Dashboard = ({ user, blogs }) => {
   );
 };
 
-
-export const getServerSideProps = withAuth(async ({req, res}, user) => {
+export const getServerSideProps = withAuth(async ({ req, res }) => {
   const { accessToken } = await auth0.getSession(req, res);
   const json = await new BlogApi(accessToken).getByUser();
-  return { blogs: json.data }
-})('admin');
+  return { blogs: json.data };
+})("admin");
 export default Dashboard;
