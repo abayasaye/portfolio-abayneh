@@ -13,6 +13,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "dotenv-webpack": "^8.0.1",
+    "moment": "^2.29.4",
     "next": "13.4.2",
     "react": "18.2.0",
     "react-datepicker": "^4.12.0",
