@@ -20,11 +20,13 @@ const Index = () => {
     startAnimation();
     return () => flipInterval.current && clearInterval(flipInterval.current);
   }, []);
+
   const startAnimation = () => {
     flipInterval.current = setInterval(() => {
       setIsFlipping((prevFlipping) => !prevFlipping);
     }, 500000);
   };
+
   return (
     <BaseLayout
       className={`cover ${isFlipping ? "cover-orange" : "cover-blue"}`}

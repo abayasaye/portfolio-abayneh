@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { Children } from "react";
+import React, { Children } from "react";
 
 const ActiveLink = ({ children, ...props }) => {
   const router = useRouter();
@@ -8,11 +8,11 @@ const ActiveLink = ({ children, ...props }) => {
   let className = child.props.className || "";
 
   if(router.asPath === props.href && props.activeClassName){
-    className = `${className}${props.activeClassName}`;
+    className = `${className} ${props.activeClassName}`;
   }
 
   delete props.activeClassName;
-  return <Link>{...props}</Link>;
+  return <Link legacyBehavior {...props}>{React.cloneElement(child, {className})}</Link>;
 };
 
 export default ActiveLink;
