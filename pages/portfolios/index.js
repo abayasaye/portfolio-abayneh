@@ -39,6 +39,7 @@ const _deletePortfolio = async  (e, portfolioId)=>{
   return (
     <BaseLayout user={dataUser} loading={loadingUser}>
       <BasePage
+      title="Newest Portfolios - Abayneh Asaye"
       header='portfolios'
       className="portfolio-page">
         <Row>
