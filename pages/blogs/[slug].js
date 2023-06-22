@@ -11,7 +11,7 @@ const BlogDetail = ({ blog, author }) => {
       <BasePage>
         <Row>
           <Col md={{ size: 6, offset: 3 }}></Col>
-          <SlateView initialContent={blog.content}/>
+          <SlateView initialContent={blog.content} />
         </Row>
       </BasePage>
     </BaseLayout>
@@ -26,7 +26,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const {data:{blog, user:author}} = await new BlogApi().getBySlug(params.slug);
-  return { props: { blog, author}}
+  const {
+    data: { blog, user: author },
+  } = await new BlogApi().getBySlug(params.slug);
+  return { props: { blog, author } };
 }
 export default BlogDetail;
