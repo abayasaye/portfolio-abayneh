@@ -3,19 +3,35 @@ import BasePage from "@/components/BasePage";
 import { useRouter } from "next/router";
 import { useGetUser } from "@/actions/user";
 import PortfolioApi from "@/lib/api/portfolios";
+import { formatDate } from "@/halpers/fumctions";
 
 const portfolio = ({ portfolio }) => {
   const router = useRouter();
   const { data: dataUser, loading: loadingUser } = useGetUser();
 
   return (
-    <BaseLayout user={dataUser} loading={loadingUser}>
+    <BaseLayout navClass="transparent" user={dataUser} loading={loadingUser}>
       <BasePage
+      
+      noWrapper
+      indexPage
         title={`${portfolio.title} - Abayneh Asaye`}
-        metaDescription={`${portfolio.description} - Abayneh Asaye`}
-        header="Portfolio Details"
-      >
-        {JSON.stringify(portfolio)}
+        metaDescription={`${portfolio.description} - Abayneh Asaye`}>
+        <div className="portfolio-detail">
+          <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+            <main role="main" class="inner page-cover">
+              <h1 class="cover-heading">{portfolio.title}</h1>
+              <p class="lead dates">{formatDate(portfolio.startDate)} - {formatDate(portfolio.endDate)}</p>
+              <p class="lead info mb-0">{portfolio.jobTitle} | {portfolio.company} | {portfolio.location}</p>
+              <p class="lead">{portfolio.description}</p>
+              <p class="lead">
+                <a href={portfolio.companyWebsite} target="_blank" class="btn btn-lg btn-secondary">
+                  Visit Company
+                </a>
+              </p>
+            </main>
+          </div>
+        </div>
       </BasePage>
     </BaseLayout>
   );
