@@ -9,8 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^2.6.0",
+    "axios": "^1.4.0",
+    "bootstrap": "^5.2.3",
+    "dotenv-webpack": "^8.0.1",
+    "moment": "^2.29.4",
     "next": "13.4.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-datepicker": "^4.12.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.44.2",
+    "react-resize-detector": "^9.1.0",
+    "react-toastify": "^9.1.3",
+    "react-typed": "^1.2.0",
+    "reactstrap": "^9.1.10",
+    "sass": "^1.62.1",
+    "slate-simple-editor": "github:Jerga99/slate-simple-editor",
+    "swr": "^2.1.5"
   }
 }
