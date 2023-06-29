@@ -14,7 +14,7 @@ const Dashboard = ({ data: user, loading }) => {
   const { data: blogs, mutate } = useGetUserBlogs();
 
   const changeBlogStatus = async (blogId, status) => {
-    await updateBlog(blogId, { status})
+    await updateBlog(blogId, { status })
       .then(() => mutate())
       .catch(() => toast.error("Something went wrong"));
   };
@@ -67,15 +67,15 @@ const Dashboard = ({ data: user, loading }) => {
   );
   return (
     <BaseLayout navClass="transparent" user={user} loading={false}>
-      <Masthead imagePath="/images/home-bg.jpg" >
-      <h1>Blogs Dashboard</h1>
-              <span className="subheading">
-                Let's write some nice blog today{" "}
-                <Link href="/blogs/editor">
-                  <Button color="primary">Create a new Blog</Button>
-                </Link>
-              </span>
-        </Masthead>
+      <Masthead imagePath="/images/home-bg.jpg">
+        <h1>Blogs Dashboard</h1>
+        <span className="subheading">
+          Let's write some nice blog today{" "}
+          <Link href="/blogs/editor">
+            <Button color="primary">Create a new Blog</Button>
+          </Link>
+        </span>
+      </Masthead>
       <BasePage className="blog-user-page">
         <Row>
           <Col md="6" className="mx-auto text-center">
