@@ -8,7 +8,11 @@ const AboutMe = () => {
   const { data, loading } = useGetUser();
   return (
     <BaseLayout user={data} loading={loading}>
-      <BasePage title="About Me - Abayneh Asaye" className="about-page" canonicalPath="/about">
+      <BasePage
+        title="About Me - Abayneh Asaye"
+        className="about-page"
+        canonicalPath="/about"
+      >
         <Row className="mt-5">
           <Col md="6">
             <div className="left-side">
